@@ -1,0 +1,28 @@
+{
+	"manifest_version": 2, // 清单文件的版本，这个必须写，而且必须是2
+	"name": "remind_water_helper", // 插件名称
+	"version": "0.1", // 插件版本
+	"description": "喝水提醒小助手", // 插件描述
+	"icons": {
+		"16": "img/tea-16.png",
+		"48": "img/tea-48.png",
+		"128": "img/tea-128.png"
+	},
+	"browser_action": {
+		"default_icon": "img/tea-16.png",
+		"default_popup": "popup.html",	// 写了这个则点击扩展图标时会弹出对应的页面
+		"default_title": "点这里打开调试"
+	},
+	// 权限申请
+	"permissions":[
+		"contextMenus", // 右键菜单
+		"tabs", // 标签
+		"notifications", // 通知
+		"webRequest", // web请求
+		"webRequestBlocking",
+		"webNavigation",	
+		"storage", // 插件本地存储
+		"http://*/*", // 可以通过executeScript或者insertCSS访问的网站
+		"https://*/*" // 可以通过executeScript或者insertCSS访问的网站
+	]
+}
