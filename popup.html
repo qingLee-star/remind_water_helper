@@ -8,13 +8,21 @@
       <!-- <script type="text/javascript" src="js/popup.js"></script> -->
   </head>
   <body>
-    <div id="btn">请设置喝水提醒时间</div>
-    <form action="">
-      <input type="radio" name="sex" value="male">每隔1min<br>
-      <input type="radio" name="sex" value="female">每隔2min
-    </form>
-    <div>
-      <button>确定</button>
+    <div id="display" class="row-fluid">
+      <div class="span12">
+        <div class="progress progress-striped active progress-success progress-large">
+          <div class="bar" id="bar" style="width: 100%;"></div>
+        </div>
+      </div>
     </div>
+    <div id="btn">距离下次休息时间还有</div>
+    <!-- <div>
+      <span class="hour">00h</span>
+      <span class="minute">00m</span>
+      <span class="second">00s</span>
+    </div> -->
+    <button id="setting">设置</button>
+    <script src="./main.js"></script>
+    <!-- <script src="./countdown.js"></script> -->
   </body>
 </html>
