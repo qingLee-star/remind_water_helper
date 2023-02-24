@@ -34,7 +34,7 @@ function ringIn(tMillis) {
   alarmDate.setMilliseconds(alarmDate.getMilliseconds() + millis);
 
   setDate = new Date();
-  alert(alarmDate.getTime() - setDate.getTime());
+  // alert(alarmDate.getTime() - setDate.getTime());
   alarmRingTimeout = setTimeout(ring, alarmDate.getTime() - setDate.getTime());
 
   updateBadgeTextInterval = setInterval(function() {
@@ -81,19 +81,23 @@ function getTimeLeftBadgeString() {
   }
 }
 
+let notification = null;
 function ring() {
   var notificationOptions = {
     type: "basic",
-    title: "Timer",
-    message: "Time\'s up!",
+    title: "喝水小助手提醒您：",
+    message: "喝水时间到啦！",
     iconUrl: "img/tea-48.png",
     priority: 2,
     requireInteraction: true//, buttons: [{title: 'Repeat'}, {title: 'Snooze for 1m'}]
   }
   chrome.notifications.create(notificationOptions);
-
   turnOff();
 }
+chrome.notifications.onClosed.addListener(() => {
+  var num = settingData.frequencyTime; // 获取选择的倒计时时间
+  setAlarm(num * 60000); // 开始计时
+});
 
 function turnOff() {
   clearTimeout(alarmRingTimeout);
@@ -102,8 +106,4 @@ function turnOff() {
   alarmDate = null;
   setDate = null;
   chrome.browserAction.setBadgeText({text: ""});
-}
-
-function error() {
-  alert("Please enter a number between 1 and 240.");
 }

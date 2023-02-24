@@ -34,6 +34,13 @@ vm.restTime = bgpage.settingData.restTime || 0;
 
 function setTimer() {
   var num = bgpage.settingData.frequencyTime; // 获取选择的倒计时时间
+  if (num < 0 || num > 60) {
+    alert('设置的频率应在0~60min！');
+    return;
+  }
+  alert('保存成功！');
+  window.location.href = "about:blank";
+	window.close();
   bgpage.setAlarm(num * 60000); // 开始计时
 }
 

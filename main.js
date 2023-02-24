@@ -4,17 +4,32 @@ settingBtn.addEventListener('click', () => {
   chrome.tabs.create({url: "/setting/setting.html"});
 });
 
-document.getElementById('btn').addEventListener('click', setTimer);
+const startBtn = document.getElementById('start');
+startBtn.addEventListener('click', () => {
+  setTimer();
+  show("stop");
+});
+
+const stopBtn = document.getElementById('stop');
+stopBtn.addEventListener('click', () => {
+  reset();
+  hide("display");
+  hide("stop");
+  show("start");
+});
 
 var refreshDisplayTimeout;
 var bgpage = chrome.extension.getBackgroundPage();
 
 document.addEventListener('DOMContentLoaded', () => {
-	setTimer();
+  refreshDisplay();
 });
 
-function show(section) {
-  document.getElementById(section).style.display = "block";
+function show(id) {
+  document.getElementById(id).style.display = "block";
+}
+function hide(id) {
+  document.getElementById(id).style.display = "none";
 }
 
 function setTimer() {
@@ -27,17 +42,15 @@ function setTimer() {
 
 function refreshDisplay() {
   if(bgpage.alarmDate) {
-    percent = bgpage.getTimeLeftPercent();
-    if	(percent < 8) {
-      document.getElementById("bar").style.color = "grey";
-    } else {
-      document.getElementById("bar").style.color = "white";
-    }
+    hide("start");
+    document.getElementById("bar").style.color = "white";
     document.getElementById("bar").textContent = bgpage.getTimeLeftString();
-    document.getElementById("bar").style.width = percent + "%";
-
     refreshDisplayTimeout = setTimeout(refreshDisplay, 100);
+    show("display");
   } else {
+    hide("display");
+    hide("stop");
+    show("start");
     reset();
   }
 }

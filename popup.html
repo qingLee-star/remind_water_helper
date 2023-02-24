@@ -5,24 +5,24 @@
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <title>喝水小助手</title>
-      <!-- <script type="text/javascript" src="js/popup.js"></script> -->
+      <style>
+        .flex {
+          display: flex;
+        }
+        .flex button {
+          margin-right: 10px;
+        }
+      </style>
   </head>
   <body>
-    <div id="display" class="row-fluid">
-      <div class="span12">
-        <div class="progress progress-striped active progress-success progress-large">
-          <div class="bar" id="bar" style="width: 100%;"></div>
-        </div>
-      </div>
+    <div id="display">
+      距离下次喝水时间还有 <span class="bar" id="bar" style="width: 100%;"></span>
     </div>
-    <div id="btn">距离下次休息时间还有</div>
-    <!-- <div>
-      <span class="hour">00h</span>
-      <span class="minute">00m</span>
-      <span class="second">00s</span>
-    </div> -->
-    <button id="setting">设置</button>
+    <div class="flex">
+      <button id="start">开始计时提醒</button>
+      <button id="stop">停止</button>
+      <button id="setting">设置</button>
+    </div>
     <script src="./main.js"></script>
-    <!-- <script src="./countdown.js"></script> -->
   </body>
 </html>

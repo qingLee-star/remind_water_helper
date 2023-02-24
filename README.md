@@ -1,1 +1,3 @@
-# remind_water_helper
+# 提醒喝水小助手
+没有在chrome商店上架，因为要注册费5刀了！  
+直接把根目录拖进chrome扩展，就可以使用啦~
