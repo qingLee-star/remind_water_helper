@@ -1,8 +1,8 @@
 {
 	"manifest_version": 2, // 清单文件的版本，这个必须写，而且必须是2
-	"name": "喝水提醒小助手", // 插件名称
+	"name": "提醒小助手", // 插件名称
 	"version": "0.1", // 插件版本
-	"description": "喝水提醒小助手", // 插件描述
+	"description": "提醒小助手", // 插件描述
 	"icons": {
 		"16": "img/tea-16.png",
 		"48": "img/tea-48.png",

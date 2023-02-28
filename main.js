@@ -43,6 +43,7 @@ function setTimer() {
 function refreshDisplay() {
   if(bgpage.alarmDate) {
     hide("start");
+    document.getElementById("titleDisplay").textContent = bgpage.settingData.title;
     document.getElementById("bar").style.color = "white";
     document.getElementById("bar").textContent = bgpage.getTimeLeftString();
     refreshDisplayTimeout = setTimeout(refreshDisplay, 100);

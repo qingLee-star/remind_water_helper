@@ -1,10 +1,10 @@
 var bgpage = chrome.extension.getBackgroundPage();
 
-function VModel(data = {}, vm = {}, attr = 'attr', elementId = '') {
+function VModel(data = {}, vm = {}, attr = 'attr', elementId = '', needNumber = true) {
   Object.defineProperty(vm, attr, {
     set(val) {  // val是刚才给data[attr]更改的值
       // 当vm里的data[attr]更改的时候就触发set事件
-      data[attr] = Number(val);
+      data[attr] = needNumber ? Number(val) : val;
       document.getElementById([elementId]).value = val; // 把数据回传给data，不是回传给attr，否则会出现递归
     },
     get() {
@@ -26,10 +26,12 @@ var data = {
 let vm = {}
 // 双向绑定，当vm的值发生改变 会调用
 VModel(bgpage.settingData, vm, 'frequencyTime', 'frequencyInput');
-VModel(bgpage.settingData, vm, 'restTime', 'restInput');
+// VModel(bgpage.settingData, vm, 'restTime', 'restInput');
+VModel(bgpage.settingData, vm, 'title', 'titleInput', false);
 // 初始化给input标签赋值
 vm.frequencyTime = bgpage.settingData.frequencyTime || 0;
-vm.restTime = bgpage.settingData.restTime || 0;
+// vm.restTime = bgpage.settingData.restTime || 0;
+vm.title = bgpage.settingData.title || '';
 
 
 function setTimer() {
