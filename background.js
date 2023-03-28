@@ -7,12 +7,44 @@ var guiLagAdjustment = 500;
 // 默认的配置值
 var settingData = {
   frequencyTime: 30,
-  // restTime: 2,
-  title: '喝水'
+  title: '喝水',
+  timeFrom: '09:00',
+  timeTo: '17:30'
 };
+var startAlarm;
+
+// 获取当前时间,是否在开始时间和结束时间范围内,如果是就开启定时器,不是则需要开启一个定时器去计算开始的时间
+// 如果结束时间到了,但是定时器时间还没到,要清除定时器setTimeout
+function getValidTime() {
+  const hour = new Date().getHours();
+  const min = new Date().getMinutes();
+  const curTime = hour + '' + (min > 9 ? min : '0'+min);
+  const from = settingData.timeFrom.replace(/:/, '');
+  const to = settingData.timeTo.replace(/:/, '');
+  if (+curTime < +from) {
+    alert(`开始提醒时间为${settingData.timeFrom}，时间到了才会开始提醒！`);
+  } else if (+curTime > +to) {
+    alert(`结束提醒时间为${settingData.timeTo}，已经过了提醒时间!`);
+  }
+  if (+curTime > +from && +curTime < +to) {
+    // 获取当前时分秒，倒计时到开始时间
+    clearTimeout(startAlarm);
+    const year = new Date().getFullYear();
+    const mon = new Date().getMonth()+1;
+    const date = new Date().getDate();
+    const gapTime = (new Date(year+'-'+mon+'-'+date+' '+settingData.timeFrom).getTime() - new Date().getTime())/1000;
+    if (gapTime > 0) {
+      startAlarm = setTimeout(ringIn, parseInt(gapTime)*1000);
+      return false;
+    } else {
+      return true;
+    }
+  }
+}
 
 function setAlarm(tMillis) {
   userChosenDuration = tMillis;
+  if (!getValidTime()) return;
   ringIn(tMillis + guiLagAdjustment);
 }
 
@@ -91,6 +123,7 @@ chrome.notifications.onClosed.addListener(() => {
 
 // 关闭
 function turnOff() {
+  clearTimeout(startAlarm);
   clearTimeout(alarmRingTimeout);
   clearInterval(updateBadgeTextInterval);
   userChosenDuration = 0;

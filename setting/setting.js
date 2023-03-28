@@ -21,23 +21,30 @@ function VModel(data = {}, vm = {}, attr = 'attr', elementId = '', needNumber = 
 /* // 定义变量,原本有一个data的,但是从bgpage.settingData赋值过来就不能双向绑定数据
 var data = {
   frequencyTime: 30,
-  restTime: 2
 }; */
 let vm = {}
 // 双向绑定，当vm的值发生改变 会调用
 VModel(bgpage.settingData, vm, 'frequencyTime', 'frequencyInput');
-// VModel(bgpage.settingData, vm, 'restTime', 'restInput');
 VModel(bgpage.settingData, vm, 'title', 'titleInput', false);
+VModel(bgpage.settingData, vm, 'timeFrom', 'timeFrom', false);
+VModel(bgpage.settingData, vm, 'timeTo', 'timeTo', false);
 // 初始化给input标签赋值
 vm.frequencyTime = bgpage.settingData.frequencyTime || 0;
-// vm.restTime = bgpage.settingData.restTime || 0;
 vm.title = bgpage.settingData.title || '';
+vm.timeFrom = bgpage.settingData.timeFrom || '';
+vm.timeTo = bgpage.settingData.timeTo || '';
 
 
 function setTimer() {
   var num = bgpage.settingData.frequencyTime; // 获取选择的倒计时时间
   if (num < 0 || num > 60) {
     alert('设置的频率应在0~60min！');
+    return;
+  }
+  const from = bgpage.settingData.timeFrom.replace(/:/, '');
+  const to = bgpage.settingData.timeTo.replace(/:/, '');
+  if (+to < +from || +to === +from) {
+    alert('结束时间段要大于开始时间段！');
     return;
   }
   alert('保存成功！');
