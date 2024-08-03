@@ -1,28 +1,35 @@
 <!DOCTYPE html>
 <html lang="zh-CN" style="min-width:300px;background-color: #292a2d;color:#a9a9b3;padding:20px;">
-  <head>
-      <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>喝水小助手</title>
-      <style>
-        .flex {
-          display: flex;
-        }
-        .flex button {
-          margin-right: 10px;
-        }
-      </style>
-  </head>
-  <body>
-    <div id="display">
-      距离下次<span id="titleDisplay"></span>时间还有 <span class="bar" id="bar" style="width: 100%;"></span>
-    </div>
-    <div class="flex">
-      <button id="start">开始计时提醒</button>
-      <button id="stop">停止</button>
-      <button id="setting">设置</button>
-    </div>
-    <script src="./main.js"></script>
-  </body>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>喝水小助手</title>
+  <style>
+    .flex {
+      display: flex;
+    }
+
+    .flex button {
+      margin-right: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="display">
+    距离下次<span id="titleDisplay"></span>时间还有 <span class="bar" id="bar" style="width: 100%;"></span>
+  </div>
+  <div id="displayForWait">
+    距离开始<span id="titleDisplayForWait"></span>的开始计时时间还有 <span class="bar" id="barForWait" style="width: 100%;"></span>
+  </div>
+  <div class="flex">
+    <button id="start">开始计时提醒</button>
+    <button id="stop">停止</button>
+    <button id="setting">设置</button>
+  </div>
+  <script src="./main.js"></script>
+</body>
+
 </html>
